@@ -1,0 +1,3 @@
+[submodule "demo-connector"]
+	path = demo-connector
+	url = https://github.com/salesforce/demo-scv-connector

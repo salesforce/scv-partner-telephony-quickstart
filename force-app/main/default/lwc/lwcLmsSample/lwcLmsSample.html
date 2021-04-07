@@ -1,0 +1,21 @@
+<!-- 
+    Copyright (c) 2021, salesforce.com, inc.
+    All rights reserved.
+    SPDX-License-Identifier: BSD-3-Clause
+    For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+-->
+
+<template>
+    <lightning-card title="LWC LMS Demo" icon-name="utility:connected_apps">     
+        <div class="slds-m-around_small lgc-bg">
+            <lightning-input type="text" label="Mesage:" value={myMessage} onchange={handleChange}></lightning-input>
+            <div class="slds-m-around_small"></div>
+            <lightning-button label="Send Message" onclick={publishMessage}></lightning-button>
+        </div>
+
+        <div class="slds-m-around_small lgc-bg">
+            <lightning-textarea label="Received Message:" readonly value={receivedMessage}></lightning-textarea>
+        </div>
+
+    </lightning-card>
+</template>

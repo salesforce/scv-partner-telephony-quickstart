@@ -1,0 +1,189 @@
+# Service Cloud Voice Partner Telephony Sample Application
+
+This is a sample application that demonstrates the Service Cloud Voice Partner Telephony integration implementation. The Service Cloud Voice partners need to provide an integration implementation to customers via a management package on Appexchange. This sample application is designed to use Salesforce CLI and 2nd 2nd generation packaging to create the managed package that contains the integration implementation sample.
+
+## Table of contents
+-   [Setup Dev Hub and Namespace Orgs](#setup-dev-hub-and-namespace-orgs)
+-   [Create an SFDX Project](#create-an-sfdx-project)
+-   [Create and Release Your Package](#create-and-release-your-package)
+-   [Deploy to a Scratch Org](#deploy-to-a-scratch-org)
+
+## Setup Dev Hub and Namespace Orgs
+
+1. Create an org with Dev Hub features enabled.
+Create a Developer Edition org.
+Enable Lightning Experience.
+Enable Dev Hub features. From Setup, enter `Dev Hub` in the Quick Find box and select **Dev Hub**. Then, click **Enable**.
+Enable **Unlocked Packages and Second-Generation Managed Packages** from the `Dev Hub` setup page 
+2. Create a namespace org.
+Create a Developer Edition org.
+Enable Lightning Experience.
+[Create a namespace](https://developer.salesforce.com/docs/atlas.en-us.228.0.lightning.meta/lightning/namespaces_creating.htm).
+        **Note: **Choose your namespace carefully. If you're trying out this feature or need a namespace for testing purposes, choose a disposable namespace. Don't choose a namespace that you want to use in the future for a production org or some other real use case. Once you associate a namespace with an org, you can't change it or reuse it.
+Use Namespace Registry to register the namespace that you created. To learn more, see [Link a Namespace to a Dev Hub Org](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_reg_namespace.htm).
+In the sfdx-project.json file, specify your namespace using the **namespace** attribute.
+3. [Create a connected app](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_connected_app.htm) in your Dev Hub org for authorization. The app allows you to set the refresh token timeout, specify IP ranges, and more. Use any name, for example, Dev Hub Connected App.
+4. To authenticate into the dev hub, use the following sfdx command. For **HUB_ORG_ALIAS**, choose any name. For **CLIENT_ID**, use the consumer key. For **INSTANCE_URL**, use [https://login.salesforce.com](https://login.salesforce.com/).
+5. sfdx force:auth:web:login --setdefaultdevhubusername --setalias <HUB_ORG_ALIAS> --clientid <CLIENT_ID> --instanceurl <INSTANCE_URL>
+6. You’ll be prompted for the secret. To retrieve it, click **Click to reveal **under Consumer Secret.
+
+**Tip**: To view the OAuth client ID and personal connected app secret, from Setup, enter `App Manager` in the Quick Find box and click **App Manager**. Click **Connected App** → **Consumer Key **and** Consumer Secret**. To learn about more authentication methods, see [Authorize an Org Using the Web Server Flow](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_web_flow.htm).
+
+## Create an SFDX Project
+
+Allow Service Cloud Voice to communicate with your telephony provider. The package you're creating includes a ConversationVendorInfo instance and other optional resources.
+
+1. Clone the `scv-external-telephony-quickstart` repository.
+
+        ```
+        git clone https://github.com/salesforce/scv-partner-telephony-quickstart
+        cd scv-external-telephony-quickstart
+        npm install     //this will install sfdx cli
+        ```
+    - You can also install the Salesforce CLI separately, see [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli)
+    - If you already have Salesforce CLI installed, please make sure to update it to the latest version by `sfdx update` This is very important because we've added our new Metadata type supported
+    - Make sure to use API version 52.0 in the sfdx project. You can find it in the sfdx-project.json, and if you have the local API version override, make sure it is 52.0, see [this help doc](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_troubleshoot_api_sync.htm).
+    - If you are not using API version 52.0 or an older Salesforce CLI version, you may see errors related to the ConversationVendorInfo Metadata type. The error message from Salesforce CLI will be similar to: `Unexpected file found in package directory: /Users/.../scv-external-telephony-quickstart/force-app/main/default/ConversationVendorInformation/sampleVendor.ConversationVendorInformation-meta.xml`
+
+2. Create your Conversation Vendor Information instance. You can find a sample file in `scv-external-telephony-quickstart/force-app/main/default/ConversationVendorInformation/sampleVendor.ConversationVendorInformation-meta.xml`.
+    - ConversationVendorInfo is a Setup entity that stores basic information about a telephony vendor.
+    - An AppExchange package should at least have one ConversationVendorInfo instance.
+    - A ConversationVendorInfo record is required when customers creating a Contact Center by importing an XML file in their Salesforce org.
+    - Set developerName field to a desired unique name, and it needs to be matched with the file name.
+    - Set masterLabel field to desired Display name for the Telephony Provider. This will show up in the Contact Center record as a Telephony provider.
+    - Set connectorUrl field to the URL of the connector.
+        - If you are testing with the demo-scv-connector, use the absolute link, for example: https://www.myTelephonyDemo.com:8080
+        - You can also choose to host the connector as a Visualforce page from the same Salesforce managed package, use the relative URL format, for example: `/apex/<namespace>__<connector visual force page name>`.
+    - Set customLoginUrl field to the URL that is used to load the telephony system login page. If you are not using it, remove it. If you are testing with the demo-scv-connector, it requires an absolute URL, for example: `https://www.myTelephonyDemo.com:8080/login.html`.
+    - Set bridgeComponent field to: `<package-namespace>:<lms bridge name>`. If you are not using it, you can remove it. If you are testing with the demo-scv-connector, you can use `{your_namespace}:lwcBridge` or `{your_namespace}:AuraBridge`.
+    - Set clientAuthMode field, possible value are "SSO", "Custom" and "Mixed"
+    - Set serverAuthMode field, possible value is "OAuth" and "None"
+
+3. Develop your connector. For a sample implementation, you can find it in our submodule: scv-external-telephony-quickstart/demo-connector in the repository.
+    - There are two options to host the connector for the customers.
+        - Host in a Visualforce page
+            - This requires to use of the static resource and a Visualforce page to host the connector.
+            - Compile your connector file. If you are testing with the demo-scv-connector, you can run `npm run build:dev`, it will compile the file and output to /dist folder
+            - Add all the files from the /dist folder to /main/default/staticresources in the sfdx project
+            - Make sure you have the corresponding -meta.xml files for the resources added in staticresources. To learn more about how to add static resources, see [Salesforce DX Project Structure and Source Format](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_source_file_format.htm)
+            - Create a connector Visualforce page inside scv-external-telephony-quickstart/force-app/main/default/pages/ as follows 
+            ``` 
+                <apex:page> 
+                    <apex:includeScript value="{!$Resource.REPLACE_WITH_CONNECTOR_RESOURCE_NAME}"/> 
+                </apex:page>
+            ```
+            - Put the relative URL to the connectorUrl field in the Conversation Vendor Information instace, for example: `/apex/<namespace>__<connector visual force page name>`
+        - Host in a standalone server
+            - If you are testing with the demo-scv-connector, you will need to put the absolute URL in the connectorUrl field in the Conversation Vendor Information instance, for example: https://www.myTelephonyDemo.com:8080
+
+4. Update the following resources as needed.
+    - **Aura Bridge:** This is a sample Aura bridge component. When referring to the LMS channel, use the namespace as a prefix: `<namespace>__<lms channel name>__c`
+        - In force-app/main/default/aura/AuraBridge/AuraBridge.cmp, change `<lightning:messageChannel type="vg_dev__ServiceCloudVoiceMessageChannel__c" ..` to `<lightning:messageChannel type="<namespace>__<lms channel name>__c" ..`
+    - **Aura LMS Sample:** This is a sample Aura component that subscribes to the lightning message channel. When referring to the LMS channel, use the namespace as a prefix: `<namespace>__<lms channel name>__c`
+        - In force-app/main/default/aura/AuraLmsSample/AuraLmsSample.cmp, change `<lightning:messageChannel type="vg_dev__ServiceCloudVoiceMessageChannel__c" ..` to `<lightning:messageChannel type="<namespace>__<lms channel name>__c"`
+    - **LWC Bridge:** This is a sample LWC bridge component. When referring to the LMS channel, do not use the namespace as a prefix.
+    - **LWC LMS Sample: ** This is a sample LWC component that subscribes to the lightning message channel. When referring to the LMS channel, do not use the namespace as a prefix.
+
+## Create and Release Your Package
+
+Use the following commands to create, update, and install the package.
+
+**Create the package**
+
+```
+sfdx force:package:create --name "<Package Name>" --path force-app --packagetype Managed --errornotificationusername <Dev Hub Username>
+
+```
+
+**Create a package version**
+
+```
+sfdx force:package:version:create --package "<Package Name>" --installationkeybypass --skipvalidation --wait 20
+```
+
+The same command is used to create newer versions of the package. This command results in an installation link that can be used in customer orgs.
+
+`Successfully created the package version [08cB0000000****IA0]. Subscriber Package Version Id: 04tB0000000d****IAQ`
+`Package Installation URL: [https://login.salesforce.com/packaging/installPackage.apexp?p0=04tB00000****DIAQ](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tB0000000d2wDIAQ)`
+
+**Release a package version**
+
+Each new package version is marked as beta when created. As you develop your package, you may create several package versions before you create a version that is ready to be released and distributed. Only released package versions can be listed on AppExchange and installed in customer orgs.
+ Before you promote the package version, ensure that the user permission, Promote a package version to released, is enabled in the Dev Hub org associated with the package. Consider creating a permission set with this user permission, and then assign the permission set to the appropriate user profiles. When you're ready to release, use force:package:version:promote.
+
+```
+sfdx force:package:version:promote --package "Expense Manager@1.3.0-7"
+```
+
+If the command is successful, a confirmation message appears.
+
+```
+Successfully promoted the package version, ID: 04tB0000000719qIAA to released.
+```
+
+After the update succeeds, view the package details.
+
+```
+sfdx force:package:version:report --package "Expense Manager@1.3.0.7"
+```
+
+Confirm that the value of the Released property is true.
+
+```
+=== Package Version
+NAME VALUE
+────────────────────────────── ───────────────────
+Name ver 1.0
+Alias Expense Manager-1.0.0.5
+Package Version Id 05iB0000000CaahIAC
+Package Id 0HoB0000000CabmKAC
+Subscriber Package Version Id 04tB0000000NPbBIAW
+Version 1.0.0.5
+Description update version
+Branch
+Tag git commit id 08dcfsdf
+Released true
+Created Date 2018-05-08 09:48
+Installation URL
+https://login.salesforce.com/packaging/installPackage.apexp?p0=04tB0000000NPbBIAW
+```
+
+You can promote and release only once for each package version number, and you can’t undo this change.
+
+To learn more, see [Workflow for Second-Generation Packages](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_dev2gp_workflow.htm).
+
+## Deploy to a Scratch Org
+
+**Create a scratch org**
+
+You can create a scratch org to test your package. This may take a few minutes.
+
+```
+sfdx force:org:create --definitionfile config/project-scratch-def.json --targetusername <Dev Hub Username>
+```
+
+**Open the scratch org**
+
+To find a list of scratch orgs, including the one you created, run this command.
+
+```
+sfdx force:org:list --verbose
+```
+
+To open the scratch org, run this command.
+
+```
+sfdx force:org:open -u <scratch org username>
+```
+
+**Install the package**
+Before installing, make sure that the SCVBYOT org permission has been turned on in the org. This permission should already be on for Winter '21 pilot participants. Then, run this command. **Target Org Username** is the org where you want to install the package.  
+
+```
+sfdx force:package:install --package "<Packge Name>@<Package Version>" --targetusername <Target Org Username> 
+```
+
+Or, use the installation URL from before.
+
+Look for an email indicating whether the package was installed. If the installation failed, review the email for details and try again. 
+To learn more about installation methods, see [Install Packages with the CLI](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_dev2gp_install_pkg_cli.htm).
