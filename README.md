@@ -7,6 +7,7 @@ This is a sample application that demonstrates the Service Cloud Voice Partner T
 -   [Create an SFDX Project](#create-an-sfdx-project)
 -   [Create and Release Your Package](#create-and-release-your-package)
 -   [Deploy to a Scratch Org](#deploy-to-a-scratch-org)
+-   [First-Generation Package and Metadata API](#first-generation-package-and-metadata-api)
 
 ## Setup Dev Hub and Namespace Orgs
 
@@ -190,7 +191,7 @@ Or, use the installation URL from before.
 Look for an email indicating whether the package was installed. If the installation failed, review the email for details and try again. 
 To learn more about installation methods, see [Install Packages with the CLI](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_dev2gp_install_pkg_cli.htm).
 
-## First-Generation Package & Metadata API
+## First-Generation Package and Metadata API
 
 If you prefer to use a First-Generation managed package contain all the resources from this sample repository, you can always do so.
 1. Ensure you have the Service Cloud Voice Partner Telephony license in your Salesforce org where you want to create the package.
