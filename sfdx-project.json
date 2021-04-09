@@ -3,7 +3,7 @@
         {
             "path": "force-app",
             "default": true,
-            "package": "BYOT Sample",
+            "package": "Service Cloud Voice Partner Telephony Sample Package",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT"
         }
