@@ -195,7 +195,7 @@ To learn more about installation methods, see [Install Packages with the CLI](ht
 If you prefer to use a First-Generation managed package contain all the resources from this sample repository, you can always do so.
 1. Ensure you have the Service Cloud Voice Partner Telephony license in your Salesforce org where you want to create the package.
 2. You can always clone this repository and use Salesforce CLI to convert all the resources source-formatted files into metadata that you can deploy using Metadata API.
-    - Complete step 1 in [Create an SFDX Project](#create-an-sfdx-project)
+    - Complete step 1 in [Create an SFDX Project](#create-an-sfdx-project), which will help you to clone this repo and install the Salesforce CLI.
     - Use force:source:convert command to convert source-formatted files into metadata. See [the command document here](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_force_source.htm#cli_reference_force_source_convert).
 Example: ```$ sfdx force:source:convert -r path/to/source -d path/to/outputdir -n 'My Package'```
 3. After you deploy the resource using Metadata API in your org, you can create and upload a managed package. Please see our [ISVforce guide on how to create and upload a managed package](https://developer.salesforce.com/docs/atlas.en-us.packagingGuide.meta/packagingGuide/packaging_uploading.htm).
