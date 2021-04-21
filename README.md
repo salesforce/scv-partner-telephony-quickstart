@@ -159,7 +159,7 @@ To learn more, see [Workflow for Second-Generation Packages](https://developer.s
 
 **Create a scratch org**
 
-You can create a scratch org to test your package. This may take a few minutes.
+You can create a scratch org to test your package. You can enable the Service Cloud Voice Partner Telephony features in a scratch org by specifying ServiceCloudVoicePartnerTelephony in the features field in your scratch org definition. This may take a few minutes. 
 
 ```
 sfdx force:org:create --definitionfile config/project-scratch-def.json --targetusername <Dev Hub Username>
@@ -180,7 +180,7 @@ sfdx force:org:open -u <scratch org username>
 ```
 
 **Install the package**
-Before installing, make sure that the SCVBYOT org permission has been turned on in the org. This permission should already be on for Winter '21 pilot participants. Then, run this command. **Target Org Username** is the org where you want to install the package.  
+Run this command. **Target Org Username** is the org where you want to install the package.  
 
 ```
 sfdx force:package:install --package "<Packge Name>@<Package Version>" --targetusername <Target Org Username> 
