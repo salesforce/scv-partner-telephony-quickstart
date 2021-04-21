@@ -159,7 +159,7 @@ To learn more, see [Workflow for Second-Generation Packages](https://developer.s
 
 **Create a scratch org**
 
-You can create a scratch org to test your package. You can enable the Service Cloud Voice Partner Telephony features in a scratch org by specifying ServiceCloudVoicePartnerTelephony in the features field in your scratch org definition. This may take a few minutes. 
+You can create a scratch org to test your package. You can enable the Service Cloud Voice Partner Telephony features in a scratch org by specifying `ServiceCloudVoicePartnerTelephony` in the features field in your scratch org definition. This may take a few minutes. 
 
 ```
 sfdx force:org:create --definitionfile config/project-scratch-def.json --targetusername <Dev Hub Username>
@@ -180,6 +180,7 @@ sfdx force:org:open -u <scratch org username>
 ```
 
 **Install the package**
+
 Run this command. **Target Org Username** is the org where you want to install the package.  
 
 ```
