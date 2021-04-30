@@ -36,19 +36,19 @@ In the sfdx-project.json file, specify your namespace using the **namespace** at
 
 Allow Service Cloud Voice to communicate with your telephony provider. The package you're creating includes a ConversationVendorInfo instance and other optional resources.
 
-1. Clone the `scv-external-telephony-quickstart` repository.
+1. Clone the `scv-partner-telephony-quickstart` repository.
 
         ```
         git clone https://github.com/salesforce/scv-partner-telephony-quickstart
-        cd scv-external-telephony-quickstart
+        cd scv-partner-telephony-quickstart
         npm install     //this will install sfdx cli
         ```
     - You can also install the Salesforce CLI separately, see [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli)
     - If you already have Salesforce CLI installed, please make sure to update it to the latest version by `sfdx update` This is very important because we've added our new Metadata type supported
     - Make sure to use API version 52.0 in the sfdx project. You can find it in the sfdx-project.json, and if you have the local API version override, make sure it is 52.0, see [this help doc](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_troubleshoot_api_sync.htm).
-    - If you are not using API version 52.0 or an older Salesforce CLI version, you may see errors related to the ConversationVendorInfo Metadata type. The error message from Salesforce CLI will be similar to: `Unexpected file found in package directory: /Users/.../scv-external-telephony-quickstart/force-app/main/default/ConversationVendorInformation/sampleVendor.ConversationVendorInformation-meta.xml`
+    - If you are not using API version 52.0 or an older Salesforce CLI version, you may see errors related to the ConversationVendorInfo Metadata type. The error message from Salesforce CLI will be similar to: `Unexpected file found in package directory: /Users/.../scv-partner-telephony-quickstart/force-app/main/default/ConversationVendorInformation/sampleVendor.ConversationVendorInformation-meta.xml`
 
-2. Create your Conversation Vendor Information instance. You can find a sample file in `scv-external-telephony-quickstart/force-app/main/default/ConversationVendorInformation/sampleVendor.ConversationVendorInformation-meta.xml`.
+2. Create your Conversation Vendor Information instance. You can find a sample file in `scv-partner-telephony-quickstart/force-app/main/default/ConversationVendorInformation/sampleVendor.ConversationVendorInformation-meta.xml`.
     - ConversationVendorInfo is a Setup entity that stores basic information about a telephony vendor.
     - An AppExchange package should at least have one ConversationVendorInfo instance.
     - A ConversationVendorInfo record is required when customers creating a Contact Center by importing an XML file in their Salesforce org.
@@ -62,14 +62,14 @@ Allow Service Cloud Voice to communicate with your telephony provider. The packa
     - Set clientAuthMode field, possible value are "SSO", "Custom" and "Mixed"
     - Set serverAuthMode field, possible value is "OAuth" and "None"
 
-3. Develop your connector. For a sample implementation, you can find it in our submodule: scv-external-telephony-quickstart/demo-connector in the repository.
+3. Develop your connector. For a sample implementation, you can find it in our submodule: scv-partner-telephony-quickstart/demo-connector in the repository.
     - There are two options to host the connector for the customers.
         - Host in a Visualforce page
             - This requires to use of the static resource and a Visualforce page to host the connector.
             - Compile your connector file. If you are testing with the demo-scv-connector, you can run `npm run build:dev`, it will compile the file and output to /dist folder
             - Add all the files from the /dist folder to /main/default/staticresources in the sfdx project
             - Make sure you have the corresponding -meta.xml files for the resources added in staticresources. To learn more about how to add static resources, see [Salesforce DX Project Structure and Source Format](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_source_file_format.htm)
-            - Create a connector Visualforce page inside scv-external-telephony-quickstart/force-app/main/default/pages/ as follows 
+            - Create a connector Visualforce page inside scv-partner-telephony-quickstart/force-app/main/default/pages/ as follows 
             ``` 
                 <apex:page> 
                     <apex:includeScript value="{!$Resource.REPLACE_WITH_CONNECTOR_RESOURCE_NAME}"/> 
@@ -112,7 +112,7 @@ The same command is used to create newer versions of the package. This command r
 **Release a package version**
 
 Each new package version is marked as beta when created. As you develop your package, you may create several package versions before you create a version that is ready to be released and distributed. Only released package versions can be listed on AppExchange and installed in customer orgs.
- Before you promote the package version, ensure that the user permission, Promote a package version to released, is enabled in the Dev Hub org associated with the package. Consider creating a permission set with this user permission, and then assign the permission set to the appropriate user profiles. When you're ready to release, use force:package:version:promote.
+ Before you promote the package version, ensure that the user permission, Promote a package version to released, is enabled in the Dev Hub org associated with the package. Consider creating a permission set with this user permission, and then assign the permission set to the appropriate user profiles. When you're ready to release, use `force:package:version:promote`.
 
 ```
 sfdx force:package:version:promote --package "Expense Manager@1.3.0-7"
