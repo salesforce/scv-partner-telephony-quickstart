@@ -201,3 +201,60 @@ If you prefer to use a First-Generation managed package contain all the resource
     - Use force:source:convert command to convert source-formatted files into metadata. See [the command document here](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_force_source.htm#cli_reference_force_source_convert).
 Example: ```$ sfdx force:source:convert -r path/to/source -d path/to/outputdir -n 'My Package'```
 3. After you deploy the resource using Metadata API in your org, you can create and upload a managed package. Please see our [ISVforce guide on how to create and upload a managed package](https://developer.salesforce.com/docs/atlas.en-us.packagingGuide.meta/packagingGuide/packaging_uploading.htm).
+
+## Get started with quick-start-partner-telephony package
+You can check the Partner Telephony features  in your Partner Telephony Enabled Org.  We have published a sample quick-start package which you can install in your org, create a Contact center and get started. 
+
+* Install quick-start-partner-telephony package in your org (https://login.salesforce.com/packaging/installPackage.apexp?p0=04tB00000007T1S) in your Org
+*  quick-start-partner-telephony package has two ConversationVendorInfo records. You can reference to one while creating a contact center. The difference between them is the connector URL, one points to localhost (127.0.0.1) and  another points to VF page (quickStartPT__quickStartPTVFConnector). Both of them require you to run a local server, For localhost you need to host the connector from  http://127.0.0.1/ and for VF page you only need server to call SCRT APIs which is common part for both options.
+* Package components are as follows
+
+Name	Type	Description
+AuraLmsSample	Aura Component Bundle	Voice Call Record Home Aura Component to demonstrate LMS 
+AuraMessageBridge	Aura Component Bundle	Aura bridge component  needed for LMS messages 
+ServiceCloudVoiceMessageChannel	Lightning Message Channel	LMS channel
+connectorPage	Visualforce Page	Connector page used as connector Url. 
+demoConnector	Static Resource	js script referenced in Connector VF page
+loginPage	Visualforce Page	demo Login Page used in Omni for partner Login
+login_page	Static Resource	js script referenced in login VF page
+logo	Static Resource	image icon
+lwcBridge	Lightning Web Component Bundle	LWC bridge component  needed for LMS messages 
+lwcLmsSample	Lightning Web Component Bundle	Voice Call Record Home LWC Component to demonstrate LMS 
+quickStartPTVFConnector	Conversation Vendor Information	Conversation Vendor Info record for VF page connector
+quickStartPartnerTelephony	Conversation Vendor Information	Conversation Vendor Info record for localhost connector
+remote_control	Static Resource	VF page for simulator page (aka remote)
+simulatorPage	Visualforce Page	JS script refrenced in Simulator VF Page
+slds_stylesheet	Static Resource	css for Simulator VF Page
+symbols	Static Resource	image icons
+
+Setup Instructions
+
+* After installing the quick-start-partner-telephony package.
+* Follow Partner telephony Setup instructions to create contact center and assigning permission sets 
+* Import a Contact Center Xml https://salesforce.quip.com/P9Y1AY0qwPsT#ObUACAI4BmQ. Set reqVendorInfoApiName as needed below. 
+    * *For connector from localhost* 
+
+<item sortOrder="2" name="reqVendorInfoApiName" label="Conversation Vendor Info Developer Name">quickStartPT__quickStartPartnerTelephony</item> 
+
+quickStartPartnerTelephony is the developer name of the Conversation Vendor Info record where connector Url is pointing to Localhost i.e  https://127.0.0.1:8080/. Make sure connector is running on localhost 8080
+
+
+    * *For connector from VF Page* 
+
+<item sortOrder="2" name="reqVendorInfoApiName" label="Conversation Vendor Info Developer Name">*quickStartPT__quickStartPTVFConnector*</item>
+
+You need to start a server for  SCRT server calls like (Inbound call, transcription, call recording). and one initial call to set org details.
+Included VF page in package  is using localhost:3030 for SCRT calls i.e http://127.0.0.1:3030/ and configuring the org details using configureTenantInfo call.
+
+You need to enable Cors on the server to enable calls to other domain from VF connector
+
+        * Run npm install cors in demo connector
+        * Add following two lines in server.mjs
+
+import cors from 'cors';
+app.use(cors());
+
+* Package also includes LMS channel and Aura/lwc Record Home components and bridge components which you can add to  Voice Call RH and play with LMS 
+* Note VF page connector is using AuraBridgeComponent and localhost connector is using lwcBridge component which are part of package
+
+
