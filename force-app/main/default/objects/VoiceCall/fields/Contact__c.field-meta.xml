@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Contact that made the Voice Call</description>
+    <externalId>false</externalId>
+    <label>Contact</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Voice Calls</relationshipLabel>
+    <relationshipName>Voice_Calls</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>
