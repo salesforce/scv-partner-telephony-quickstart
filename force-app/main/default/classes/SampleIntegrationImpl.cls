@@ -26,7 +26,7 @@ public class SampleIntegrationImpl implements service_cloud_voice.PartnerConnect
     }
     public service_cloud_voice.ConnectedAppSetupParams getConnectedAppSetupParams(service_cloud_voice.ContactCenterInfo contactCenterInfo) {
         Map<String, String> customAttributes = new Map<String, String>();
-        return new service_cloud_voice.ConnectedAppSetupParams('https://signin.aws.amazon.com/byotAcsUrl', 'https://signin.aws.amazon.com/byotEntityUrl' + contactCenterInfo.getContactCenterId(), customAttributes, 'https://signin.aws.amazon.com/byotSloUrl');
+        return new service_cloud_voice.ConnectedAppSetupParams('https://example.com/byotAcsUrl', 'https://examplecom/byotEntityUrl' + contactCenterInfo.getContactCenterId(), customAttributes, 'https://example.com/byotSloUrl');
     }
     public service_cloud_voice.UserSyncingResponse addUsersToContactCenter(service_cloud_voice.UserSyncingRequest userSyncingRequest) {
         List<service_cloud_voice.UserInfo> users = userSyncingRequest.getUsersInfo();
