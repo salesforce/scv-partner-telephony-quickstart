@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ConversationVendorInfo xmlns="http://soap.sforce.com/2006/04/metadata">
-    <clientAuthMode>SSO</clientAuthMode>
+<ConversationVendorInfo xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <bridgeComponent>REPLACE_WITH_NAMESPACE_NAME:lwcBridge</bridgeComponent>
+    <einsteinConversationInsightsSupported>true</einsteinConversationInsightsSupported>
+    <partnerContactCenterListSupported>true</partnerContactCenterListSupported>
+    <namedCredentialSupported>true</namedCredentialSupported>
+    <partnerTransferDestinationsSupported>true</partnerTransferDestinationsSupported>
+    <agentSSOSupported>true</agentSSOSupported>
+    <clientAuthMode>SSO</clientAuthMode>
     <connectorUrl>/apex/connectorPage</connectorUrl>
+    <customConfig>sampleCustomConfig__c</customConfig>
+    <customLoginUrl>test</customLoginUrl>
     <developerName>sampleVendor</developerName>
+    <integrationClassName>SampleIntegrationImpl</integrationClassName>
+    <integrationClass>SampleIntegrationImpl</integrationClass>
     <masterLabel>Sample Vendor</masterLabel>
+    <namedCredential>sampleNamedCredential</namedCredential>
     <serverAuthMode>None</serverAuthMode>
+    <userSyncingSupported>true</userSyncingSupported>
+    <vendorType>ServiceCloudVoicePartner</vendorType>
 </ConversationVendorInfo>
