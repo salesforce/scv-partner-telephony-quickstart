@@ -12,15 +12,15 @@ This is a sample application that demonstrates the Service Cloud Voice Partner T
 ## Setup Dev Hub and Namespace Orgs
 
 1. Create an org with Dev Hub features enabled.
-Create a Developer Edition org.
-Enable Lightning Experience.
-Enable Dev Hub features. From Setup, enter `Dev Hub` in the Quick Find box and select **Dev Hub**. Then, click **Enable**.
-Enable **Unlocked Packages and Second-Generation Managed Packages** from the `Dev Hub` setup page 
+ - Create a Developer Edition org.
+   - Enable Lightning Experience.
+   - Enable Dev Hub features. From Setup, enter `Dev Hub` in the Quick Find box and select **Dev Hub**. Then, click **Enable**.
+   - Enable **Unlocked Packages and Second-Generation Managed Packages** from the `Dev Hub` setup page 
 2. Create a namespace org.
-Create a Developer Edition org.
-Enable Lightning Experience.
-[Create a namespace](https://developer.salesforce.com/docs/atlas.en-us.228.0.lightning.meta/lightning/namespaces_creating.htm).
-        **Note: **Choose your namespace carefully. If you're trying out this feature or need a namespace for testing purposes, choose a disposable namespace. Don't choose a namespace that you want to use in the future for a production org or some other real use case. Once you associate a namespace with an org, you can't change it or reuse it.
+ - Create a Developer Edition org.
+   - Enable Lightning Experience.
+   - [Create a namespace](https://developer.salesforce.com/docs/atlas.en-us.228.0.lightning.meta/lightning/namespaces_creating.htm).
+     - Note: Choose your namespace carefully. If you're trying out this feature or need a namespace for testing purposes, choose a disposable namespace. Don't choose a namespace that you want to use in the future for a production org or some other real use case. Once you associate a namespace with an org, you can't change it or reuse it.
 Use Namespace Registry to register the namespace that you created. To learn more, see [Link a Namespace to a Dev Hub Org](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_reg_namespace.htm).
 In the sfdx-project.json file, specify your namespace using the **namespace** attribute.
 3. [Create a connected app](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_connected_app.htm) in your Dev Hub org for authorization. The app allows you to set the refresh token timeout, specify IP ranges, and more. Use any name, for example, Dev Hub Connected App.
