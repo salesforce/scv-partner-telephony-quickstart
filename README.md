@@ -48,7 +48,7 @@ Allow Service Cloud Voice to communicate with your telephony provider. The packa
 ```
 
    - You can also install the Salesforce CLI separately, see [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli)
-   - You may need to update the "sfdcLoginUrl" and "signupTargetLoginUrl" on your sfdx-project.json based on the Salesforce instance you work on.
+   - You may need to update the "sfdcLoginUrl" and "signupTargetLoginUrl" on your sfdx-project.json based on the Salesforce instance you work on, and "namespace" based on the namespace you created.
    - If you already have Salesforce CLI installed, please make sure to update it to the latest version by `sfdx update` This is very important because we've added our new Metadata type supported
    - Make sure to use API version 52.0 in the sfdx project. You can find it in the sfdx-project.json, and if you have the local API version override, make sure it is 52.0, see [this help doc](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_troubleshoot_api_sync.htm).
    - If you are not using API version 52.0 or an older Salesforce CLI version, you may see errors related to the ConversationVendorInfo Metadata type. The error message from Salesforce CLI will be similar to: `Unexpected file found in package directory: /Users/.../scv-partner-telephony-quickstart/force-app/main/default/ConversationVendorInformation/sampleVendor.ConversationVendorInformation-meta.xml`
