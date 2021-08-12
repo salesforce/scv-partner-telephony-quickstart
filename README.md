@@ -85,10 +85,11 @@ Allow Service Cloud Voice to communicate with your telephony provider. The packa
             - If you are testing with the demo-scv-connector, you will need to put the absolute URL in the connectorUrl field in the Conversation Vendor Information instance, for example: https://www.myTelephonyDemo.com:8080
 
 4. Update the following resources as needed.
+ - find all the files that contains the word REPLACE_WITH_NAMESPACE_NAME and replace it with your namespace. You could run a command like this one: sed -i ``` 's/REPLACE_WITH_NAMESPACE_NAME/mynamespace/g' * ```
     - **Aura Bridge:** This is a sample Aura bridge component. When referring to the LMS channel, use the namespace as a prefix: `<namespace>__<lms channel name>__c`
-        - In force-app/main/default/aura/AuraBridge/AuraBridge.cmp, change `<lightning:messageChannel type="vg_dev__ServiceCloudVoiceMessageChannel__c" ..` to `<lightning:messageChannel type="<namespace>__<lms channel name>__c" ..`
+        - In force-app/main/default/aura/AuraBridge/AuraBridge.cmp, change `<lightning:messageChannel type="REPLACE_WITH_NAMESPACE_NAME__ServiceCloudVoiceMessageChannel__c" ..` to `<lightning:messageChannel type="<namespace>__<lms channel name>__c" ..`
     - **Aura LMS Sample:** This is a sample Aura component that subscribes to the lightning message channel. When referring to the LMS channel, use the namespace as a prefix: `<namespace>__<lms channel name>__c`
-        - In force-app/main/default/aura/AuraLmsSample/AuraLmsSample.cmp, change `<lightning:messageChannel type="vg_dev__ServiceCloudVoiceMessageChannel__c" ..` to `<lightning:messageChannel type="<namespace>__<lms channel name>__c"`
+        - In force-app/main/default/aura/AuraLmsSample/AuraLmsSample.cmp, change `<lightning:messageChannel type="REPLACE_WITH_NAMESPACE_NAME__ServiceCloudVoiceMessageChannel__c" ..` to `<lightning:messageChannel type="<namespace>__<lms channel name>__c"`
     - **LWC Bridge:** This is a sample LWC bridge component. When referring to the LMS channel, do not use the namespace as a prefix.
     - **LWC LMS Sample: ** This is a sample LWC component that subscribes to the lightning message channel. When referring to the LMS channel, do not use the namespace as a prefix.
 
