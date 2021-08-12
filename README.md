@@ -94,6 +94,8 @@ Allow Service Cloud Voice to communicate with your telephony provider. The packa
 ## Create and Release Your Package
 
 Use the following commands to create, update, and install the package.
+First run this command: sfdx config:set defaultdevhubusername=<DEV_HUB_USERNAME>
+
 
 **Create the package**
 
