@@ -24,11 +24,14 @@ This is a sample application that demonstrates the Service Cloud Voice Partner T
 Use Namespace Registry to register the namespace that you created. To learn more, see [Link a Namespace to a Dev Hub Org](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_reg_namespace.htm).
 In the sfdx-project.json file, specify your namespace using the **namespace** attribute.
 3. [Create a connected app](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_connected_app.htm) in your Dev Hub org for authorization. The app allows you to set the refresh token timeout, specify IP ranges, and more. Use any name, for example, Dev Hub Connected App.
-4. To authenticate into the dev hub, use the following sfdx command. For **HUB_ORG_ALIAS**, choose any name. For **CLIENT_ID**, use the consumer key. For **INSTANCE_URL**, use [https://login.salesforce.com](https://login.salesforce.com/).
+4. To authenticate into the dev hub, use the following sfdx command. 
+ - For **HUB_ORG_ALIAS**, choose any name. 
+ - For **CLIENT_ID**, use the consumer key of the connected app you created. 
+ - For **INSTANCE_URL**, use [https://login.salesforce.com](https://login.salesforce.com/).
        ```
        sfdx force:auth:web:login --setdefaultdevhubusername --setalias <HUB_ORG_ALIAS> --clientid <CLIENT_ID> --instanceurl <INSTANCE_URL>
        ```
-6. You’ll be prompted for the secret. To retrieve it, click **Click to reveal **under Consumer Secret.
+ - You’ll be prompted for the secret. Use the Consumer Secret from the connected app. To retrieve it, click **Click to reveal** under Consumer Secret.
 
 **Tip**: To view the OAuth client ID and personal connected app secret, from Setup, enter `App Manager` in the Quick Find box and click **App Manager**. Click **Connected App** → **Consumer Key **and** Consumer Secret**. To learn about more authentication methods, see [Authorize an Org Using the Web Server Flow](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_web_flow.htm).
 
