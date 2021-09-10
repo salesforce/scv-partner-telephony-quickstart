@@ -100,6 +100,11 @@ class SampleIntegrationImplTest {
       '',
       callKeys
     );
-    rc.getSignedUrls(recordingMediaRequest);
+    service_cloud_voice.RecordingMediaResponse response = rc.getSignedUrls(
+      recordingMediaRequest
+    );
+    List<service_cloud_voice.RecordingMediaItem> mediaItems = response.getRecordingMediaItems();
+    service_cloud_voice.RecordingMediaItem item = mediaItems.get(0);
+    System.assertEquals(item.getVendorCallKey(), '1');
   }
 }
