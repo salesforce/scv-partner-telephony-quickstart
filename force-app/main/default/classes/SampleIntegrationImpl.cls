@@ -54,7 +54,7 @@ public class SampleIntegrationImpl implements service_cloud_voice.PartnerConnect
 
     public service_cloud_voice.PhoneNumberResponse listPhoneNumbers(service_cloud_voice.PhoneNumberRequest phoneNumberRequest) {
         List<service_cloud_voice.PhoneNumberInfo> phoneNumberInfos = new List<service_cloud_voice.PhoneNumberInfo>();
-        service_cloud_voice.PhoneNumberInfo phoneInfo = new service_cloud_voice.PhoneNumberInfo('9990009999',  'US',  'TOLL_FREE',  '9990009999');
+        service_cloud_voice.PhoneNumberInfo phoneInfo = new service_cloud_voice.PhoneNumberInfo('+19090909090',  'US',  'TOLL_FREE',  'contact1');
         phoneNumberInfos.add(phoneInfo);
         return  new service_cloud_voice.PhoneNumberResponse(true, null, phoneNumberInfos);
     }
