@@ -87,8 +87,6 @@
         <lookupPhoneDialogsAdditionalFields>ToPhoneNumber</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CallDisposition</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CallDurationInSeconds</lookupPhoneDialogsAdditionalFields>
-        <lookupPhoneDialogsAdditionalFields>FromPhoneNumber</lookupPhoneDialogsAdditionalFields>
-        <lookupPhoneDialogsAdditionalFields>ToPhoneNumber</lookupPhoneDialogsAdditionalFields>
         <searchResultsAdditionalFields>CallType</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>FromPhoneNumber</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CallResolution</searchResultsAdditionalFields>

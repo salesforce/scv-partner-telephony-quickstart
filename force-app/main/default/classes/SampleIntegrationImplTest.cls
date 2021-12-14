@@ -95,7 +95,7 @@ class SampleIntegrationImplTest {
   static void testGetSignedUrls() {
     SampleIntegrationImpl rc = new SampleIntegrationImpl();
     List<String> callKeys = new List<String>();
-    callKeys.add('1');
+    callKeys.add('vendorCallKey1');
     service_cloud_voice.RecordingMediaRequest recordingMediaRequest = new service_cloud_voice.RecordingMediaRequest(
       '',
       callKeys
@@ -105,6 +105,19 @@ class SampleIntegrationImplTest {
     );
     List<service_cloud_voice.RecordingMediaItem> mediaItems = response.getRecordingMediaItems();
     service_cloud_voice.RecordingMediaItem item = mediaItems.get(0);
-    System.assertEquals(item.getVendorCallKey(), '1');
+    System.assertEquals(item.getVendorCallKey(), 'vendorCallKey1');
+  }
+
+  @isTest static void testGetPublicKey() {
+    SampleIntegrationImpl rc = new SampleIntegrationImpl();
+    service_cloud_voice.KeyResponse keyResponse = rc.getPublicKey(new service_cloud_voice.ContactCenterInfo('','','','','',''));
+    System.assertEquals(keyResponse.getPublicKey(), 'dummyKey');
+  }
+
+  @isTest static void testListPhoneNumbers() {
+      SampleIntegrationImpl rc = new SampleIntegrationImpl();
+      service_cloud_voice.PhoneNumberResponse phoneNumberResponse = rc.listPhoneNumbers(new service_cloud_voice.PhoneNumberRequest(new service_cloud_voice.ContactCenterInfo('','','','','','')));
+      service_cloud_voice.PhoneNumberInfo phoneInfo = phoneNumberResponse.getPhoneNumberInfos().get(0);
+      System.assertEquals(phoneInfo.getPhoneNumber(), '+19090909090');
   }
 }
