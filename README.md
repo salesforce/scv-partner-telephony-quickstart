@@ -230,6 +230,7 @@ You can check the Partner Telephony features  in your Partner Telephony Enabled 
 |logo	|Static Resource	|image icon
 |lwcBridge	|Lightning Web Component Bundle	|LWC bridge component  needed for LMS messages 
 |lwcLmsSample	|Lightning Web Component Bundle	|Voice Call Record Home LWC Component to demonstrate LMS 
+|agentConfig	|Lightning Web Component Bundle	|LWC Agent Settings Component
 |quickStartPTVFConnector	|Conversation Vendor Information	|Conversation Vendor Info record for VF page connector
 |quickStartPartnerTelephony	|Conversation Vendor Information	|Conversation Vendor Info record for localhost connector
 |remote_control	|Static Resource	|VF page for simulator page (aka remote)
