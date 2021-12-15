@@ -18,6 +18,8 @@ This is a sample application that demonstrates the Service Cloud Voice Partner T
   - Enable Lightning Experience.
   - Enable Dev Hub features. From Setup, enter `Dev Hub` in the Quick Find box and select **Dev Hub**. Then, click **Enable**.
   - Enable **Unlocked Packages and Second-Generation Managed Packages** from the `Dev Hub` setup page
+- Enable **Unlocked Packages and Second-Generation Managed Packages** from the `Dev Hub` setup page
+- Enable **Unlocked Packages and Second-Generation Managed Packages** from the `Dev Hub` setup page
 
 2. Create a namespace org.
 
@@ -31,6 +33,10 @@ This is a sample application that demonstrates the Service Cloud Voice Partner T
 4. To authenticate into the dev hub, use the following sfdx command.
 
 - For **HUB_ORG_ALIAS**, choose any name.
+- For **HUB_ORG_ALIAS**, choose any name.
+- For **HUB_ORG_ALIAS**, choose any name.
+- For **CLIENT_ID**, use the consumer key of the connected app you created.
+- For **CLIENT_ID**, use the consumer key of the connected app you created.
 - For **CLIENT_ID**, use the consumer key of the connected app you created.
 - For **INSTANCE_URL**, use [https://login.salesforce.com](https://login.salesforce.com/).
   ` sfdx force:auth:web:login --setdefaultdevhubusername --setalias <HUB_ORG_ALIAS> --clientid <CLIENT_ID> --instanceurl <INSTANCE_URL> `
@@ -80,14 +86,25 @@ Allow Service Cloud Voice to communicate with your telephony provider. The packa
        - Add all the files from the /dist folder to /main/default/staticresources in the sfdx project
        - Make sure you have the corresponding -meta.xml files for the resources added in staticresources. To learn more about how to add static resources, see [Salesforce DX Project Structure and Source Format](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_source_file_format.htm)
        - Create a connector Visualforce page inside scv-partner-telephony-quickstart/force-app/main/default/pages/ as follows
+     - Create a connector Visualforce page inside scv-partner-telephony-quickstart/force-app/main/default/pages/ as follows
+       - Create a connector Visualforce page inside scv-partner-telephony-quickstart/force-app/main/default/pages/ as follows
        ```
-           <apex:page>
-               <apex:includeScript value="{!$Resource.REPLACE_WITH_CONNECTOR_RESOURCE_NAME}"/>
-           </apex:page>
+
        ```
-       - Put the relative URL to the connectorUrl field in the Conversation Vendor Information instace, for example: `/apex/<namespace>__<connector visual force page name>`
-     - Host in a standalone server
-       - If you are testing with the demo-scv-connector, you will need to put the absolute URL in the connectorUrl field in the Conversation Vendor Information instance, for example: https://www.myTelephonyDemo.com:8080
+     ````
+          ```
+              <apex:page>
+         <apex:page>
+              <apex:page>
+                  <apex:includeScript value="{!$Resource.REPLACE_WITH_CONNECTOR_RESOURCE_NAME}"/>
+             <apex:includeScript value="{!$Resource.REPLACE_WITH_CONNECTOR_RESOURCE_NAME}"/>
+                  <apex:includeScript value="{!$Resource.REPLACE_WITH_CONNECTOR_RESOURCE_NAME}"/>
+              </apex:page>
+          ```
+          - Put the relative URL to the connectorUrl field in the Conversation Vendor Information instace, for example: `/apex/<namespace>__<connector visual force page name>`
+      - Host in a standalone server
+          - If you are testing with the demo-scv-connector, you will need to put the absolute URL in the connectorUrl field in the Conversation Vendor Information instance, for example: https://www.myTelephonyDemo.com:8080
+     ````
 
 4. Update the following resources as needed.
 
