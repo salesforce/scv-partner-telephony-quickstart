@@ -17,7 +17,6 @@
     <integrationClass>SampleIntegrationImpl</integrationClass>
     <masterLabel>Sample Vendor</masterLabel>
     <namedCredential>sampleNamedCredential</namedCredential>
-    <serverAuthMode>None</serverAuthMode>
     <userSyncingSupported>true</userSyncingSupported>
     <vendorType>ServiceCloudVoicePartner</vendorType>
     <telephonySettingsComponent>REPLACE_WITH_NAMESPACE_NAME:agentConfig</telephonySettingsComponent>
