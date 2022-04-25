@@ -11,5 +11,5 @@
     "namespace": "REPLACE_WITH_NAMESPACE_NAME",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "signupTargetLoginUrl": "https://gs0.salesforce.com",
-    "sourceApiVersion": "54.0"
+    "sourceApiVersion": "55.0"
 }
