@@ -6,6 +6,9 @@
     <namedCredentialSupported>true</namedCredentialSupported>
     <partnerTransferDestinationsSupported>true</partnerTransferDestinationsSupported>
     <agentSSOSupported>true</agentSSOSupported>
+    <keyProvisioningSupported>true</keyProvisioningSupported>
+    <universalCallRecordingAccessSupported>true</universalCallRecordingAccessSupported>
+    <partnerPhoneNumbersSupported>true</partnerPhoneNumbersSupported>
     <clientAuthMode>SSO</clientAuthMode>
     <connectorUrl>/apex/connectorPage</connectorUrl>
     <customConfig>sampleCustomConfig__c</customConfig>
@@ -14,7 +17,7 @@
     <integrationClass>SampleIntegrationImpl</integrationClass>
     <masterLabel>Sample Vendor</masterLabel>
     <namedCredential>sampleNamedCredential</namedCredential>
-    <serverAuthMode>None</serverAuthMode>
     <userSyncingSupported>true</userSyncingSupported>
     <vendorType>ServiceCloudVoicePartner</vendorType>
+    <telephonySettingsComponent>REPLACE_WITH_NAMESPACE_NAME:agentConfig</telephonySettingsComponent>
 </ConversationVendorInfo>
