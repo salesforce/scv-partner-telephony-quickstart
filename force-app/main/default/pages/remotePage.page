@@ -17,8 +17,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink">
         <head>
             <title>Demo Phone Simulator</title>
-            <!-- uncomment and replace with line below for use in visualforce page <link rel="stylesheet" type="text/css" href="{!$Resource.slds_stylesheet}" media="screen"/> -->
-            <link rel="stylesheet" type="text/css" href="assets/slds-stylesheet.css" media="screen"></link>
+            <link rel="stylesheet" type="text/css" href="{!$Resource.slds_stylesheet}" media="screen"/>
         </head>
     
         <body>
@@ -318,7 +317,7 @@
                                 <div class="slds-checkbox">
                                     <input type="checkbox" name="options" id="phoneNumberContactType" checked="true"></input>
                                     <label class="slds-checkbox__label" for="phoneNumberContactType">
-                                        <span class="slds-checkbox_faux"></span>Phone Number</span>
+                                        <span class="slds-checkbox_faux">Phone Number</span>
                                     </label>
                                 </div>
                         </div>
@@ -482,8 +481,7 @@
                                     <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-button_last" id="participant-types-options">
                                         <button class="slds-button slds-button_icon slds-button_icon-brand" aria-haspopup="true" title="Participant Types options" id="participant-types">
                                             <svg class="slds-button__icon" aria-hidden="true">
-                                                <!-- uncomment and replace with line below for use in visualforce page <use xlink:href="{!$Resource.symbols}#hide"></use> -->
-                                                <use xlink:href="/assets/symbols.svg#down"></use>
+                                                <use xlink:href="{!$Resource.symbols}#hide"></use>
                                             </svg>
                                             <span class="slds-assistive-text">End Call Participant Types</span>
                                         </button>
@@ -619,8 +617,7 @@
                                     <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-button_last" id="sender-types-options">
                                         <button class="slds-button slds-button_icon slds-button_icon-brand" aria-haspopup="true" title="Sender type options" id="sender-types">
                                             <svg class="slds-button__icon" aria-hidden="true">
-                                                <!-- uncomment and replace with line below for use in visualforce page <use xlink:href="{!$Resource.symbols}#hide"></use> -->
-                                                <use xlink:href="/assets/symbols.svg#down"></use>
+                                                <use xlink:href="{!$Resource.symbols}#hide"></use>
                                             </svg>
                                             <span class="slds-assistive-text">Sender type options</span>
                                         </button>
@@ -653,8 +650,7 @@
                             <div class="slds-form-element__control slds-input-has-fixed-addon">
                                 <button id="record-button" type="button" class="btn btn-danger">
                                     <svg class="slds-button__icon" aria-hidden="true">
-                                        <!-- uncomment and replace with line below for use in visualforce page <use xlink:href="{!$Resource.symbols}#hide"></use> -->
-                                        <use xlink:href="/assets/symbols.svg#record"></use>
+                                        <use xlink:href="{!$Resource.symbols}#hide"></use>
                                     </svg>
                                     <span class="slds-assistive-text">Record a message</span>
                                 </button>
@@ -860,8 +856,7 @@
                     </div>
                 </article>
             </div>
-            <!-- uncomment and replace with line below for use in visualforce page <script src="{!$Resource.remote_control}"></script> -->
-            <script src="/assets/remote.bundle.js"></script>
+            <script src="{!$Resource.remote_control}"></script>
         </body>
     </html>
 </apex:page>
