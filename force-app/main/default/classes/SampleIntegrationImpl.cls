@@ -2,8 +2,8 @@ public class SampleIntegrationImpl implements service_cloud_voice.PartnerConnect
         service_cloud_voice.TransferDestinationProvider, service_cloud_voice.PartnerSSO, service_cloud_voice.UserSyncing, service_cloud_voice.KeyProvider, service_cloud_voice.PhoneNumberProvider {
 
     public service_cloud_voice.RecordingMediaResponse getSignedUrls(service_cloud_voice.RecordingMediaRequest request) {
-        service_cloud_voice.RecordingMediaItem recordingMediaItem1 = new service_cloud_voice.RecordingMediaItem('vendorCallKey1', 'signedUrl1', null);
-        service_cloud_voice.RecordingMediaItem recordingMediaItem2 = new service_cloud_voice.RecordingMediaItem('vendorCallKey2', 'signedUrl2', null);
+        service_cloud_voice.RecordingMediaItem recordingMediaItem1 = new service_cloud_voice.RecordingMediaItem('vendorCallKey1', 'signedUrl1', '30', null);
+        service_cloud_voice.RecordingMediaItem recordingMediaItem2 = new service_cloud_voice.RecordingMediaItem('vendorCallKey2', 'signedUrl2', '30', null);
         List<service_cloud_voice.RecordingMediaItem> recordingMediaItems = new List<service_cloud_voice.RecordingMediaItem>();
         recordingMediaItems.add(recordingMediaItem1);
         recordingMediaItems.add(recordingMediaItem2);
