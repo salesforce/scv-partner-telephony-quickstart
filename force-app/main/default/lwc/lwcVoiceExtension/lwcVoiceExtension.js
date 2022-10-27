@@ -8,7 +8,6 @@
 import { LightningElement, api, track } from 'lwc';
 
 export default class ScvToolkitApiTester extends LightningElement {
-    @track headSetControlsDisabled = true;
     payload = '{"key": "value"}';
     teleEventName = 'None';
     teleEvent = 'No events received yet.';
