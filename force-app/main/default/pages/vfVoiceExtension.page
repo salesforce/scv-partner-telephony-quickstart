@@ -1,0 +1,20 @@
+<apex:page standardController="Lead" showHeader="false">
+    <apex:includeScript value="/lightning/lightning.out.js" />
+
+    <script>
+        $Lightning.use("REPLACE_WITH_NAMESPACE_NAME:VoiceExtensionLightningApp", function() {
+            $Lightning.createComponent(
+                "REPLACE_WITH_NAMESPACE_NAME:AuraVoiceExtension",
+                {},
+                "voiceExtension",
+                function(cmp) {
+                    console.log("Component created!");
+                    console.log(cmp);
+                });
+            });
+    </script>
+    
+    <div id="voiceExtension"></div>
+    
+
+</apex:page>
