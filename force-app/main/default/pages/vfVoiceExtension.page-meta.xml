@@ -3,5 +3,5 @@
     <apiVersion>57.0</apiVersion>
     <availableInTouch>true</availableInTouch>
     <confirmationTokenRequired>false</confirmationTokenRequired>
-    <label>vfVoiceExtension</label>
+    <label>Visualforce Voice Extension</label>
 </ApexPage>
