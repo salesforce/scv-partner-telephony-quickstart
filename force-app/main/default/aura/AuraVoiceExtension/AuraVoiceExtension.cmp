@@ -1,0 +1,21 @@
+<!-- 
+    Copyright (c) 2021, salesforce.com, inc.
+    All rights reserved.
+    SPDX-License-Identifier: BSD-3-Clause
+    For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+-->
+
+<aura:component implements="opencti:availableForVoiceExtension,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome" access="global" >
+    <lightning:messageChannel type="REPLACE_WITH_NAMESPACE_NAME__ServiceCloudVoiceMessageChannel__c" aura:id="sampleMessageChannel" onMessage="{!c.handleMessage}" scope="APPLICATION"/>
+    <aura:attribute name="message" type="String"/>
+    <aura:attribute name="sendMessage" type="String"/>
+    <lightning:card variant="Narrow" title="Aura Voice Extension">
+        <div class="slds-grid slds-m-around_small">
+            <lightning:input label="Message:" value="{!v.sendMessage}" />
+            <lightning:button class="slds-button slds-button_neutral slds-m-left_small" label="Send" title="Send Message"  onclick="{!c.publishMessage}" />
+        </div>  
+        <div class="slds-m-around_small">
+            <lightning:textarea name="input4" label="Received Message:" readonly="true" value="{!v.message}" class ="textarea"/> 
+        </div>
+    </lightning:card>
+</aura:component>

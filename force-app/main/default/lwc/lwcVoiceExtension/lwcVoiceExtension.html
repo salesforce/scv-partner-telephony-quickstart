@@ -1,0 +1,13 @@
+<!-- 
+    Copyright (c) 2021, salesforce.com, inc.
+    All rights reserved.
+    SPDX-License-Identifier: BSD-3-Clause
+    For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+-->
+<template>
+    <lightning-service-cloud-voice-toolkit-api></lightning-service-cloud-voice-toolkit-api>
+    <lightning-card variant="Narrow" title="LWC Voice Extension">
+        <p class="slds-p-horizontal_medium slds-text-title_caps">LATEST EVENT: {teleEventName}</p>
+        <lightning-formatted-text class="slds-p-horizontal_medium slds-p-bottom_medium" value={teleEvent}></lightning-formatted-text>
+    </lightning-card>
+</template>

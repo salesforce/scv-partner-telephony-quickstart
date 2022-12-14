@@ -6,7 +6,7 @@
 
    <lightningMessageFields>
        <fieldName>message</fieldName>
-       <description>message To Send</description>
+       <description>Message To Send</description>
    </lightningMessageFields>
 
 </LightningMessageChannel>
