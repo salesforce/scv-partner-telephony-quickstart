@@ -1,5 +1,5 @@
 {
-  "name": "scv-external-telephony-sfdx-app",
+  "name": "@salesforce/scv-external-telephony-sfdx-app",
   "private": true,
   "version": "1.0.0",
   "description": "SFDX project to integrate telephony vendors with Service Cloud Voice",
