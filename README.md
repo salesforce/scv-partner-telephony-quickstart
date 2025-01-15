@@ -44,7 +44,8 @@ Allow Service Cloud Voice to communicate with your telephony provider. The packa
 ```shell
         git clone --recurse-submodules https://github.com/salesforce/scv-partner-telephony-quickstart
         cd scv-partner-telephony-quickstart
-        npm install     //this will install sfdx cli
+        npm install     // this will install sfdx cli
+        //if it does not work, try 'npm i --legacy-peer-deps' 
 ```
 
    - You can also install the Salesforce CLI separately, see [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli)
