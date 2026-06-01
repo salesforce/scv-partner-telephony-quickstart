@@ -238,6 +238,7 @@ You can check the Partner Telephony features  in your Partner Telephony Enabled 
 |simulatorPage	|Visualforce Page	|JS script refrenced in Simulator VF Page
 |slds_stylesheet	|Static Resource	|css for Simulator VF Page
 |symbols	|Static Resource	|image icons
+|omniAutoAnswerController	|Lightning Web Component Bundle	|Voice Extension component that auto-accepts inbound Queue calls while leaving DID / direct-extension calls for the agent to accept manually
 
 **Setup Instructions**
 
@@ -267,5 +268,41 @@ You can check the Partner Telephony features  in your Partner Telephony Enabled 
 
 * Package also includes LMS channel and Aura/lwc Record Home components and bridge components which you can add to  Voice Call RH and play with LMS. 
 * Note VF page connector is using AuraBridgeComponent and localhost connector is using lwcBridge component which are part of package.
+
+## Selective Auto-Answer for Queue Calls (omniAutoAnswerController)
+
+The `omniAutoAnswerController` LWC automatically accepts inbound **Queue** calls while leaving **DID / direct-extension** calls for the agent to accept manually. It uses the Voice Toolkit API's `callstarted` event and `acceptCall()` method — no Apex or additional permissions required.
+
+### How it works
+
+1. On `callstarted`, the component reads `callAttributes` from the event payload.
+2. If the attributes indicate a Queue-routed call (key varies by adapter — see below), it calls `acceptCall()` immediately.
+3. If no queue indicator is found, the component does nothing and the agent sees the normal Accept button.
+
+### Setup
+
+1. Deploy `omniAutoAnswerController` and `Omni_Auto_Answer_Voice_Extension` to your org.
+2. In Setup → **Contact Centers**, open your contact center → **SCV Settings**:
+   - Set **Voice Extension Flexipage** to `Omni Auto Answer Voice Extension`.
+   - Set **Always Show Voice Extension** to `true`.
+3. In your Omni-Channel presence configuration, ensure **Automatically accept work requests** is **unchecked**. The built-in Salesforce auto-accept overrides this component — it must be off for selective auto-answer to work.
+
+### Verifying the correct callAttributes key
+
+Partner telephony adapters surface routing context under different key names. The component checks three common ones:
+
+| Key | Expected value |
+|-----|---------------|
+| `routingType` | `"Queue"` |
+| `callRoutingType` | `"Queue"` |
+| `queueCall` | `true` |
+
+If auto-accept is not firing, open browser DevTools on the agent console and uncomment the debug line in `handleCallStarted` to log the raw payload:
+
+```javascript
+console.log('[OmniAutoAnswer] callAttributes:', JSON.stringify(detail));
+```
+
+This reveals the exact key your adapter uses so you can lock it in.
 
 
