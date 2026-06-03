@@ -110,7 +110,7 @@ sfdx force:package:create --name "<Package Name>" --path force-app --packagetype
 **Create a package version**
 
 ```
-sfdx force:package:version:create --package "<Package Name>" --installationkeybypass --definitionfile config/project-scratch-def.json --skipvalidation --wait 20
+sfdx force:package:version:create --package "<Package Name>" --installationkeybypass --definitionfile config/project-scratch-def.json --skipvalidation --wait 20 -c
 ```
 
 The same command is used to create newer versions of the package. This command results in an installation link that can be used in customer orgs.
