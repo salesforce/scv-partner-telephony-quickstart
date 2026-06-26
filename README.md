@@ -238,6 +238,8 @@ You can check the Partner Telephony features  in your Partner Telephony Enabled 
 |simulatorPage	|Visualforce Page	|JS script refrenced in Simulator VF Page
 |slds_stylesheet	|Static Resource	|css for Simulator VF Page
 |symbols	|Static Resource	|image icons
+|omniAutoAnswerController	|Lightning Web Component Bundle	|Voice Extension component that auto-accepts inbound Queue calls while leaving DID / direct-extension calls for the agent to accept manually
+|Omni_Auto_Answer_Voice_Extension	|FlexiPage	|VoiceExtension FlexiPage that wires omniAutoAnswerController to the Contact Center — assign this under SCV Settings → Voice Extension Flexipage
 
 **Setup Instructions**
 
@@ -267,5 +269,77 @@ You can check the Partner Telephony features  in your Partner Telephony Enabled 
 
 * Package also includes LMS channel and Aura/lwc Record Home components and bridge components which you can add to  Voice Call RH and play with LMS. 
 * Note VF page connector is using AuraBridgeComponent and localhost connector is using lwcBridge component which are part of package.
+
+## Selective Auto-Answer for Queue Calls (omniAutoAnswerController)
+
+### The Problem
+
+Salesforce's native **Automatically accept work requests** setting is all-or-nothing. Enabling it auto-accepts every call type, removing agent control over direct calls. Disabling it forces agents to manually click Accept on every call — adding friction on high-volume queue work. There is no out-of-the-box way to auto-accept one type and not the other.
+
+### What It Does
+
+`omniAutoAnswerController` is a background Voice Extension LWC that brings **intelligent, selective call auto-answering** to the agent console — without any Apex code, custom permissions, or third-party dependencies.
+
+- **Queue call?** → Auto-accepts immediately. The agent is connected without lifting a finger.
+- **DID / direct-extension call?** → Does nothing. The agent sees the standard Accept button and controls when to pick up.
+
+This mirrors how a physical ACD desk phone works: queue calls ring through automatically, direct calls wait for the agent to answer.
+
+### Key Capabilities
+
+| Capability | Detail |
+|---|---|
+| Selective auto-answer | Accepts Queue calls only; leaves DID / direct calls manual |
+| Adapter-agnostic | Checks all three common `callAttributes` key names used across partner telephony adapters |
+| Zero UI footprint | Runs entirely in the background; no visible panel or buttons rendered |
+| Memory-safe | Removes event listeners on component disconnect via `disconnectedCallback` |
+| Duplicate-proof | `_accepting` flag prevents repeated `acceptCall()` if the adapter fires `callstarted` more than once; resets on `callended` |
+| Debug-ready | Built-in commented hook to log raw `callAttributes` for adapter-specific key discovery |
+
+### Setup
+
+1. Deploy `omniAutoAnswerController` and `Omni_Auto_Answer_Voice_Extension` to your org.
+2. In Setup → **Contact Centers**, open your contact center → **SCV Settings**:
+   - Set **Voice Extension Flexipage** to `Omni Auto Answer Voice Extension`.
+   - Set **Always Show Voice Extension** to `true`.
+3. In your Omni-Channel presence configuration, ensure **Automatically accept work requests** is **unchecked**. The built-in Salesforce auto-accept overrides this component if enabled — it must be off for selective auto-answer to work.
+
+### How It Works
+
+1. On `callstarted`, the component reads `callAttributes` from the Voice Toolkit API event payload.
+2. If the attributes indicate a Queue-routed call, it calls `acceptCall()` immediately.
+3. If no queue indicator is found, the component does nothing and the agent sees the normal Accept button.
+4. On `callended`, internal state resets cleanly for the next call.
+
+### Verifying the Correct callAttributes Key
+
+Partner telephony adapters surface routing context under different key names. The component checks three common ones:
+
+| Key | Expected value |
+|-----|---------------|
+| `routingType` | `"Queue"` |
+| `callRoutingType` | `"Queue"` |
+| `queueCall` | `true` |
+
+If auto-accept is not firing, open browser DevTools on the agent console and uncomment the debug line in `handleCallStarted` to log the raw payload:
+
+```javascript
+console.log('[OmniAutoAnswer] callAttributes:', JSON.stringify(detail));
+```
+
+This reveals the exact key your adapter uses so you can add it to the check.
+
+### Expected Console Output
+
+When a Queue call arrives and auto-accepts:
+```
+[OmniAutoAnswer] Queue call detected, auto-accepting.
+[OmniAutoAnswer] Call accepted successfully.
+```
+
+When a DID / direct-extension call arrives (no output — this is expected):
+```
+(no logs — agent sees the Accept button as normal)
+```
 
 
